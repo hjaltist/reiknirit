@@ -18,21 +18,9 @@ public class Percolation {
     
     public static void main(String[] args) {
         
-        Percolation p  = new Percolation(5);
-        p.open(0,1);
-        p.open(1,1);
-        p.open(1,2);
-        p.open(2,2);
-        p.open(3,2);
-        p.open(4,2);
-
-        System.out.println(p.isFull(1,1));
-        System.out.println(p.isFull(3,1));
-        System.out.println(p.isFull(4,1));
-        System.out.println(p.isFull(4,3));
-
+        Percolation p  = new Percolation(1);
+        System.out.println(p.isOpen(0,0));
         System.out.println(p.percolates());
-
     }
     
     public Percolation(int n) {
@@ -45,11 +33,9 @@ public class Percolation {
         this.TOP_CELL = (n * n);
         this.BOTTOM_CELL = (n * n) + 1;
         
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
                 theGrid[i][j] = false;
-            }
-        }
         
         for (int i = 0; i < n; i++) {
             addUnion(numberFromCoordinates(0,i),TOP_CELL);
@@ -61,8 +47,7 @@ public class Percolation {
         if (!isValid(row,col))
             throw new IndexOutOfBoundsException();
         
-        if (isOpen(row, col))
-            return;
+        if (isOpen(row, col)) return;
         
         theGrid[row][col] = true;
         openCount+= 1;
@@ -78,7 +63,11 @@ public class Percolation {
     public boolean isFull(int row, int col) {
         if (!isValid(row,col))
             throw new IndexOutOfBoundsException();
-        return isConnected(numberFromCoordinates(row,col), TOP_CELL);
+
+        if (isOpen(row, col))
+            return isConnected(numberFromCoordinates(row,col), TOP_CELL);
+
+        return false;
     }
     
     public int numberOfOpenSites() {
@@ -86,6 +75,7 @@ public class Percolation {
     }
     
     public boolean percolates() {
+        if (openCount == 0) return false;
         return isConnected(TOP_CELL, BOTTOM_CELL);
     }
     
@@ -124,7 +114,6 @@ public class Percolation {
             if (row == gridSize -1 && factorY == 1 ){
                 continue;
             }
-            
             if (isValid(row + factorY, col + factorX)){
                 if (isOpen(row + factorY, col+ factorX)){
                     addUnion(numberFromCoordinates(row, col), numberFromCoordinates(row + factorY, col + factorX));
@@ -137,12 +126,8 @@ public class Percolation {
         if (!unionGrid.connected(y, x))
             unionGrid.union(y, x);
     }
-    
+
     private boolean isConnected (int y, int x){
         return  unionGrid.connected(y, x);
-    }
-    
-    private  void printDebug(String deb){
-        System.out.println(deb);
     }
 }
