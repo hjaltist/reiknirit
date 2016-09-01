@@ -1,4 +1,4 @@
-package reiknirit.s1;
+package s1;
 
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
@@ -17,7 +17,7 @@ public class PercolationStats {
             perc.open(StdRandom.uniform(0, N), StdRandom.uniform(0, N));
         }
 
-
+        System.out.println(perc.percolates());
     }
 
     public double mean() {
@@ -37,6 +37,6 @@ public class PercolationStats {
     }
 
     public static void main(String[] args) {
-        PercolationStats test = new PercolationStats(50, 50);
+        PercolationStats test = new PercolationStats(5, 20);
     }
 }
