@@ -1,6 +1,5 @@
-package reiknirit.s1;
+package s1;
 
-import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 /**
@@ -12,7 +11,7 @@ public class Percolation {
     private int gridSize;
     private boolean[][] theGrid;
     private WeightedQuickUnionUF unionGrid;
-    private int openCount;
+    public int openCount;
     private int TOP_CELL;
     private int BOTTOM_CELL;
     
