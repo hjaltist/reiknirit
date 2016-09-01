@@ -1,4 +1,4 @@
-package s1;
+package reiknirit.s1;
 
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;

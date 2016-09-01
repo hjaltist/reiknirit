@@ -21,16 +21,18 @@ public class Percolation {
         Percolation p  = new Percolation(5);
         p.open(0,1);
         p.open(1,1);
-        p.open(2,1);
-        p.open(3,1);
-        p.open(4,1);
-        
+        p.open(1,2);
+        p.open(2,2);
+        p.open(3,2);
+        p.open(4,2);
+
         System.out.println(p.isFull(1,1));
         System.out.println(p.isFull(3,1));
         System.out.println(p.isFull(4,1));
-        
+        System.out.println(p.isFull(4,3));
+
         System.out.println(p.percolates());
-        
+
     }
     
     public Percolation(int n) {
@@ -94,7 +96,7 @@ public class Percolation {
     }
     
     private int numberFromCoordinates(int row, int col){
-        return (row) * gridSize + col;
+        return (row) * gridSize + (col);
     }
     
     private void checkSurroundingsFrom(int row, int col){
@@ -125,10 +127,7 @@ public class Percolation {
             
             if (isValid(row + factorY, col + factorX)){
                 if (isOpen(row + factorY, col+ factorX)){
-                    if (row == 0 || row == gridSize - 1)
-                        continue;
-                    else
-                        addUnion(numberFromCoordinates(row, col), numberFromCoordinates(row + factorY, col + factorX));
+                    addUnion(numberFromCoordinates(row, col), numberFromCoordinates(row + factorY, col + factorX));
                 }
             }
         }
