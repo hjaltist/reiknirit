@@ -16,9 +16,18 @@ public class Percolation {
     private int BOTTOM_CELL;
     
     public static void main(String[] args) {
-        
-        Percolation p  = new Percolation(1);
-        System.out.println(p.isOpen(0,0));
+
+        //small manual test
+        Percolation p  = new Percolation(5);
+        p.open(0,0);
+        p.open(1,0);
+        p.open(2,0);
+        p.open(3,0);
+        p.open(4,0);
+
+        System.out.println(p.isOpen(4,0));
+        System.out.println(p.isOpen(3,1));
+        System.out.println(p.isFull(2,0));
         System.out.println(p.percolates());
     }
     
