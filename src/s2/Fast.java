@@ -2,7 +2,6 @@ package s2;
 
 import edu.princeton.cs.algs4.In;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -10,13 +9,19 @@ import java.util.Arrays;
  */
 public class Fast {
 
-    private ArrayList<ArrayList<Point>> segments;
     private Point[] points;
 
     private Fast(Point[] points){
         this.points = points;
         Arrays.sort(this.points);
-        segments = new ArrayList<ArrayList<Point>>();
+        findSegments();
+    }
+
+    private void findSegments() {
+
+        for (Point p : this.points){
+            //dosomething
+        }
     }
 
     public static void main(String[] args) {

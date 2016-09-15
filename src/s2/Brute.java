@@ -2,7 +2,6 @@ package s2;
 
 import java.util.Arrays;
 import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.Queue;
 
 /**
  * Created by Gunnar on 15/09/16.
@@ -10,7 +9,6 @@ import edu.princeton.cs.algs4.Queue;
 public class Brute {
 
     private Point[] points;
-    private Queue<Queue<Point>> segments = new Queue<Queue<Point>>();
 
     private Brute(Point[] points){
         this.points = points;
@@ -19,7 +17,7 @@ public class Brute {
     }
 
     public void findSegments(){
-        
+
         int numberOfPoints = this.points.length;
 
         for(int p=0; p< numberOfPoints; p++)
@@ -30,28 +28,25 @@ public class Brute {
                         double pr = points[p].slopeTo(points[r]);
                         double ps = points[p].slopeTo(points[s]);
                         if(pq == pr && pr == ps){
-                            Queue<Point> x = new Queue<Point>();
-                            x.enqueue(points[p]);
-                            x.enqueue(points[q]);
-                            x.enqueue(points[r]);
-                            x.enqueue(points[s]);
-                            this.segments.enqueue(x);
+                            Point[] thePoints =  new Point[4];
+                            thePoints[0] = points[p];
+                            thePoints[1] = points[q];
+                            thePoints[2] = points[r];
+                            thePoints[3] = points[s];
+                            printResults(thePoints);
                         }
                     }
     }
 
-    public void results(){
+    public void printResults(Point[] thePoints){
 
-        while (!this.segments.isEmpty()){
-            Queue<Point> thePoints = this.segments.dequeue();
-            int size = thePoints.size();
+            int size = thePoints.length;
             for (int k = 0; k < size ; k++){
-                Point p = thePoints.dequeue();
+                Point p = thePoints[k];
                 String arrow = (size == k+1 ? "" : " -> ");
                 System.out.print("(" + p.x + ", " + p.y + ")" + arrow);
             }
             System.out.print("\n");
-        }
     }
 
     public static void main(String[] args) {
@@ -64,9 +59,6 @@ public class Brute {
             int x = in.readInt(), y = in.readInt();
             points[i] = new Point(x, y);
         }
-
-        Brute brute = new Brute(points);
-        brute.results();
-
+        new Brute(points);
     }
 }
