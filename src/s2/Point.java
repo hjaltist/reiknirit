@@ -1,6 +1,7 @@
 package s2;
 
 import java.util.Comparator;
+import edu.princeton.cs.algs4.*;
 
 /*************************************************************************
  * Compilation: javac Point.java Execution: Dependencies: StdDraw.java
@@ -14,7 +15,26 @@ public class Point implements Comparable<Point> {
     public final int x, y;
 
     // compare points by slope
-    public final Comparator<Point> SLOPE_ORDER = null;
+    public final Comparator<Point> SLOPE_ORDER = new SlopeComparator();
+
+    private class SlopeComparator implements Comparator<Point> {
+
+        public int compare(Point point1, Point point2) {
+
+            double slope1 = Point.this.slopeTo(point1);
+            double slope2 = Point.this.slopeTo(point2);
+
+            if(slope1 < slope2){
+                return -1;
+            }
+            else if(slope1 > slope2){
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        }
+    }
 
     // create the point (x, y)
     public Point(int x, int y) {
@@ -36,17 +56,33 @@ public class Point implements Comparable<Point> {
 
     // slope between this point and that point
     public double slopeTo(Point that) {
-        // TODO: Implement this
-        return 0;
+
+        if(this.y == that.y && this.x == that.x){
+            return Double.NEGATIVE_INFINITY;
+        }
+        if (this.y == that.y){
+            return 0.0;
+        }
+        else  if (this.x == that.x){
+            return Double.POSITIVE_INFINITY;
+        }
+        return (((double)that.y - this.y) / (that.x - this.x));
     }
 
     /**
      * Is this point lexicographically smaller than that one? comparing
      * y-coordinates and breaking ties by x-coordinates
+     *
+     * 10
+     4000 30000 3500 28000 3000 26000 2000 22000 1000 18000
+     13000 21000 23000 16000 28000 13500 28000 5000 28000 1000
      */
     public int compareTo(Point that) {
-        // TODO: Implement this
-        return 0;
+
+        if ((this.y < that.y) || ((this.y == that.y) && (this.x < that.x))){
+            return -1;
+        }
+        return 1;
     }
 
     // return string representation of this point
